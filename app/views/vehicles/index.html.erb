@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Garrity Motors</h1>
+<h3>Check out our hot deals!</h3>
+
+<ul class="nav nav-pills" role="tablist">
+  <li><%= link_to "All",vehicles_path %></li>
+  <% @all_makes.each do |c| %>
+  <li> <%= link_to c.make, vehicles_path(make: c.make) %> </li>
+  <% end %>
+</ul>
+
+<div class="row">
+    <% @vehicles.each do |vehicle| %>
+      <div class="col-md-4">
+       <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <h2><%= vehicle.make %></h2>
+            <p>Model: <%= vehicle.model %></p>
+            <p>Year: <%= vehicle.year %></p>
+          </div>
+         <div class="row">
+           <%= image_tag vehicle.avatar.url(:medium) %>
+         </div>
+        
+         <div class="btn-group">
+          <%= link_to 'Show', vehicle, class: "btn btn-default" %>
+          <%= link_to 'Edit', edit_vehicle_path(vehicle), class: "btn btn-default" %>
+          <%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+         </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'New Vehicle', new_vehicle_path, class:"btn btn-default" %>
